@@ -5,21 +5,21 @@ Users can fill in their details, preview the resume in real-time, and download i
 
 ---
 
-## 🚀 Features
+## Features
 
-- 🧾 Multiple Resume Templates (Classic & Modern)
-- 👤 Profile Photo Upload with Preview
-- 🧠 Dynamic Form (Education, Experience, Projects)
-- 🎯 Field-based Resume (IT / Commerce / Arts / Other)
-- 📋 Live Resume Preview
-- 📄 Download Resume as PDF
-- 📝 Download Resume as DOCX
-- 🔗 Support for LinkedIn, GitHub & Portfolio links
-- 📱 Fully Responsive Design
+- Multiple Resume Templates (Classic & Modern)
+- Profile Photo Upload with Preview
+- Dynamic Form (Education, Experience, Projects)
+- Field-based Resume (IT / Commerce / Arts / Other)
+- Live Resume Preview
+- Download Resume as PDF
+- Download Resume as DOCX
+- Support for LinkedIn, GitHub & Portfolio links
+- Fully Responsive Design
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - HTML5
 - CSS3
@@ -29,20 +29,28 @@ Users can fill in their details, preview the resume in real-time, and download i
 
 ---
 
-## 📂 Project Structure
----
+## Project Structure
+
+```
 ATS-Resume-Builder/
 │
-├── index.html # Main UI structure
-├── style.css # Styling and layout
-├── script.js # Functionality and logic
+├── index.html      
+├── style.css       
+├── script.js      
 └── README.md
+```
 ---
 
+## Live Demo
+
+🌐 Live Application: https://your-vercel-link.vercel.app/  
+💻 Source Code: https://github.com/aayushgupta-4341/-ATS-Resume-Builder  
 
 ---
 
-## ⚙️ How It Works
+---
+
+## How It Works
 
 1. Fill in your personal and professional details
 2. Add sections like:
@@ -58,7 +66,7 @@ ATS-Resume-Builder/
 
 ---
 
-## 💡 Key Functionalities
+## Key Functionalities
 
 - Dynamic form fields using JavaScript
 - Conditional rendering (Projects section based on field type)
@@ -68,7 +76,7 @@ ATS-Resume-Builder/
 
 ---
 
-## 🎯 Use Case
+## Use Case
 
 This project is useful for:
 - Students creating resumes
@@ -78,7 +86,7 @@ This project is useful for:
 
 ---
 
-## 📌 Future Improvements
+## Future Improvements
 
 - Add more resume templates
 - Add drag-and-drop section reordering
@@ -88,15 +96,15 @@ This project is useful for:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Aayush Gupta**  
-- 💼 IT Student & Developer  
-- 🔗 GitHub: https://github.com/aayushgupta-4341  
-- 🔗 LinkedIn: https://linkedin.com/in/aayush-gupta4341  
+- IT Student & Developer  
+- GitHub: https://github.com/aayushgupta-4341  
+- LinkedIn: https://linkedin.com/in/aayush-gupta4341  
 
 ---
 
-## ⭐ Support
+## Support
 
 If you like this project, consider giving it a ⭐ on GitHub!
