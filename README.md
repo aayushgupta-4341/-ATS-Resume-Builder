@@ -44,7 +44,7 @@ ATS-Resume-Builder/
 ## Live Demo
 
 🌐 Live Application: https://your-vercel-link.vercel.app/  
-💻 Source Code: https://github.com/aayushgupta-4341/-ATS-Resume-Builder.git  
+💻 Source Code: https://ats-resume-builder-gules.vercel.app/  
 
 ---
 
