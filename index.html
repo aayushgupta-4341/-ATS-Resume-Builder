@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATS Resume Builder</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- html2pdf for PDF download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- docx.js for DOCX download -->
+    <script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">📄</span>
+          <span class="logo-text">ATS <strong>Resume Builder</strong></span>
+        </div>
+        <p class="tagline">Fill your details → Generate → Download</p>
+      </div>
+    </header>
+
+    <!-- ===== MAIN LAYOUT ===== -->
+    <main class="main-layout">
+      <!-- ========== LEFT: FORM PANEL ========== -->
+      <section class="form-panel">
+        <!-- Template & Field Selector -->
+        <div class="form-card">
+          <h2 class="section-title">⚙️ Settings</h2>
+          <div class="row-2">
+            <div class="field-group">
+              <label>Template</label>
+              <select id="templateSelect">
+                <option value="classic">Classic</option>
+                <option value="modern">Modern</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label>Field Type</label>
+              <select id="fieldType" onchange="toggleSections()">
+                <option value="it">Engineering / IT</option>
+                <option value="commerce">Commerce</option>
+                <option value="arts">Arts</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personal Info -->
+        <div class="form-card">
+          <h2 class="section-title">👤 Personal Information</h2>
+
+          <!-- Photo Upload -->
+          <div class="field-group photo-upload-wrap">
+            <label>Profile Photo (Optional)</label>
+            <div class="photo-row">
+              <input
+                type="file"
+                id="photoInput"
+                accept="image/*"
+                onchange="previewPhoto(event)"
+              />
+              <div class="photo-preview-wrap">
+                <img
+                  id="photoPreview"
+                  src=""
+                  alt="Photo Preview"
+                  style="display: none"
+                />
+                <span id="photoPlaceholder" class="photo-placeholder"
+                  >No photo</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="row-2">
+            <div class="field-group">
+              <label>Full Name <span class="req">*</span></label>
+              <input type="text" id="fullName" placeholder="e.g. John Doe" />
+            </div>
+            <div class="field-group">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" id="email" placeholder="abc@gmail.com" />
+            </div>
+          </div>
+          <div class="row-2">
+            <div class="field-group">
+              <label>Phone <span class="req">*</span></label>
+              <input type="text" id="phone" placeholder="+91-9000000000" />
+            </div>
+            <div class="field-group">
+              <label>Location</label>
+              <input
+                type="text"
+                id="location"
+                placeholder="e.g. Mumbai, Maharashtra, India"
+              />
+            </div>
+          </div>
+          <div class="row-2">
+            <div class="field-group">
+              <label>LinkedIn URL</label>
+              <input
+                type="url"
+                id="linkedin"
+                placeholder="https://linkedin.com/in/yourname"
+              />
+            </div>
+            <div class="field-group">
+              <label>GitHub URL</label>
+              <input
+                type="url"
+                id="github"
+                placeholder="https://github.com/yourname"
+              />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Other Links (Portfolio / Instagram / etc.)</label>
+            <input
+              type="text"
+              id="otherLinks"
+              placeholder="https://yourportfolio.com, https://instagram.com/yourname"
+            />
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="form-card">
+          <h2 class="section-title">📝 Professional Summary</h2>
+          <div class="field-group">
+            <label>Summary</label>
+            <textarea
+              id="summary"
+              rows="4"
+              placeholder="Write a short professional summary about yourself. e.g. Motivated IT student with experience in full-stack development..."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="form-card">
+          <h2 class="section-title">🛠️ Technical Skills</h2>
+          <div class="field-group">
+            <label>Languages</label>
+            <input
+              type="text"
+              id="skillLang"
+              placeholder="e.g. JavaScript, Python, Java, C++"
+            />
+          </div>
+          <div class="field-group">
+            <label>Frameworks / Libraries</label>
+            <input
+              type="text"
+              id="skillFramework"
+              placeholder="e.g. React.js, Node.js, Django"
+            />
+          </div>
+          <div class="field-group">
+            <label>Databases</label>
+            <input
+              type="text"
+              id="skillDB"
+              placeholder="e.g. MongoDB, MySQL, PostgreSQL"
+            />
+          </div>
+          <div class="field-group">
+            <label>Tools</label>
+            <input
+              type="text"
+              id="skillTools"
+              placeholder="e.g. Git, GitHub, VS Code, Postman"
+            />
+          </div>
+          <div class="field-group">
+            <label>Concepts / Other Skills</label>
+            <input
+              type="text"
+              id="skillConcepts"
+              placeholder="e.g. REST APIs, Agile, Responsive Design"
+            />
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="form-card">
+          <h2 class="section-title">🎓 Education</h2>
+          <div id="educationList"></div>
+          <button class="add-btn" onclick="addEducation()">
+            + Add Education
+          </button>
+        </div>
+
+        <!-- Experience -->
+        <div class="form-card">
+          <h2 class="section-title">💼 Experience / Internships</h2>
+          <div id="experienceList"></div>
+          <button class="add-btn" onclick="addExperience()">
+            + Add Experience
+          </button>
+        </div>
+
+        <!-- Projects (shown for IT / Engineering) -->
+        <div class="form-card section-projects" id="projectSection">
+          <h2 class="section-title">🚀 Projects</h2>
+          <div id="projectList"></div>
+          <button class="add-btn" onclick="addProject()">+ Add Project</button>
+        </div>
+
+        <!-- Certifications -->
+        <div class="form-card">
+          <h2 class="section-title">📜 Certifications</h2>
+          <div class="field-group">
+            <label>Certifications (one per line)</label>
+            <textarea
+              id="certifications"
+              rows="3"
+              placeholder="e.g. AWS Certified Developer – 2024&#10;Google UX Design Certificate – 2023"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="form-card">
+          <h2 class="section-title">🏆 Achievements</h2>
+          <div class="field-group">
+            <label>Achievements (one per line)</label>
+            <textarea
+              id="achievements"
+              rows="3"
+              placeholder="e.g. Ranked top 5% in college&#10;Won state-level coding competition 2024"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="form-card">
+          <h2 class="section-title">🌐 Languages Known</h2>
+          <div class="field-group">
+            <input
+              type="text"
+              id="languages"
+              placeholder="e.g. English, Hindi, Marathi"
+            />
+          </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="form-card">
+          <h2 class="section-title">ℹ️ Additional Information</h2>
+          <div class="field-group">
+            <label>Any additional info (one per line)</label>
+            <textarea
+              id="additionalInfo"
+              rows="3"
+              placeholder="e.g. Strong analytical and problem-solving mindset&#10;Quick learner, adaptable to new technologies"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-bar">
+          <button class="btn-generate" onclick="generateResume()">
+            ⚡ Generate Resume
+          </button>
+          <button class="btn-pdf" onclick="downloadPDF()">
+            ⬇️ Download PDF
+          </button>
+          <button class="btn-docx" onclick="downloadDOCX()">
+            📄 Download DOCX
+          </button>
+        </div>
+      </section>
+
+      <!-- ========== RIGHT: RESUME PREVIEW ========== -->
+      <section class="preview-panel">
+        <div class="preview-header">
+          <span>📋 Resume Preview</span>
+        </div>
+        <div class="preview-scroll">
+          <div id="resumeOutput" class="resume-empty-state">
+            <div class="empty-icon">📄</div>
+            <p>
+              Fill in your details on the left<br />and click
+              <strong>Generate Resume</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
